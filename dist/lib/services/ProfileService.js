@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+//@ts-expect-error
 var Profile = require('../models/Profile');
 //@ts-ignore
 var getGif = require('../utils/giphy').getGif;
@@ -58,19 +59,6 @@ module.exports = /** @class */ (function () {
             });
         });
     };
-    ProfileServices.retrieve = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var profiles;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Profile.retrieve(id)];
-                    case 1:
-                        profiles = _a.sent();
-                        return [2 /*return*/, profiles];
-                }
-            });
-        });
-    };
     ProfileServices.update = function (id, _a) {
         var name = _a.name, word = _a.word;
         return __awaiter(this, void 0, void 0, function () {
@@ -83,19 +71,6 @@ module.exports = /** @class */ (function () {
                         return [4 /*yield*/, Profile.update(id, { name: name, word: word, gif: gif })];
                     case 2:
                         profile = _b.sent();
-                        return [2 /*return*/, profile];
-                }
-            });
-        });
-    };
-    ProfileServices.delete = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var profile;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Profile.delete(id)];
-                    case 1:
-                        profile = _a.sent();
                         return [2 /*return*/, profile];
                 }
             });

@@ -17,6 +17,19 @@ describe('04-build-something routes', () => {
 
   afterAll(() => pool.end());
 
+  it('should create a user profile when route is hit', async () => {
+    const res = await request(app)
+      .post(`/api/v1/profiles`)
+      .send({ name: 'maple', word: 'goopy' });
+
+    expect(res.body).toEqual({
+      gif: expect.any(String),
+      id: '2',
+      name: 'maple',
+      word: 'goopy',
+    });
+  });
+
   it('should retrieve one user profile when route is hit', async () => {
     const res = await request(app).get(
       `/api/v1/profiles/${testProfile.body.id}`
@@ -26,7 +39,7 @@ describe('04-build-something routes', () => {
   });
 
   it('should retrieve all user profiles when route is hit', async () => {
-    const res = await request(app).get(`/api/v1/profiles/all`);
+    const res = await request(app).get(`/api/v1/profiles/`);
 
     expect(res.body[0]).toEqual(testProfile.body);
   });

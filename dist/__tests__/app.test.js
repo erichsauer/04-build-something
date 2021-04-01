@@ -57,6 +57,25 @@ describe('04-build-something routes', function () {
         });
     }); });
     afterAll(function () { return pool.end(); });
+    it('should create a user profile when route is hit', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request(app)
+                        .post("/api/v1/profiles")
+                        .send({ name: 'maple', word: 'goopy' })];
+                case 1:
+                    res = _a.sent();
+                    expect(res.body).toEqual({
+                        gif: expect.any(String),
+                        id: '2',
+                        name: 'maple',
+                        word: 'goopy',
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('should retrieve one user profile when route is hit', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
@@ -73,7 +92,7 @@ describe('04-build-something routes', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request(app).get("/api/v1/profiles/all")];
+                case 0: return [4 /*yield*/, request(app).get("/api/v1/profiles/")];
                 case 1:
                     res = _a.sent();
                     expect(res.body[0]).toEqual(testProfile.body);

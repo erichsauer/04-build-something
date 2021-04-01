@@ -9,8 +9,8 @@ module.exports = class Profile {
   constructor({ id, name, word, gif }: UserProfile) {
     this.id = id;
     this.name = name || 'friend';
-    this.word = word || 'default word';
-    this.gif = gif || 'default gif';
+    this.word = word;
+    this.gif = gif || 'no gif found :(';
   }
 
   static async insert({ name, word, gif }: UserProfile) {
@@ -25,7 +25,7 @@ module.exports = class Profile {
   }
 
   static async retrieve(id: string) {
-    if (id === 'all') {
+    if (!id) {
       const { rows } = await pool.query(`SELECT * FROM profiles`);
 
       const profiles = rows.map((profile: UserProfile) => new Profile(profile));

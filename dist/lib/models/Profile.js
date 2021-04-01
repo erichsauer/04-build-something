@@ -41,8 +41,8 @@ module.exports = /** @class */ (function () {
         var id = _a.id, name = _a.name, word = _a.word, gif = _a.gif;
         this.id = id;
         this.name = name || 'friend';
-        this.word = word || 'default word';
-        this.gif = gif || 'default gif';
+        this.word = word;
+        this.gif = gif || 'no gif found :(';
     }
     Profile.insert = function (_a) {
         var name = _a.name, word = _a.word, gif = _a.gif;
@@ -64,7 +64,7 @@ module.exports = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(id === 'all')) return [3 /*break*/, 2];
+                        if (!!id) return [3 /*break*/, 2];
                         return [4 /*yield*/, pool.query("SELECT * FROM profiles")];
                     case 1:
                         rows = (_a.sent()).rows;
