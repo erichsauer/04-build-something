@@ -15,6 +15,8 @@ describe('04-build-something routes', () => {
       .send({ name: 'abel', word: 'wizard' });
   });
 
+  afterAll(() => pool.end());
+
   it('should retrieve one user profile when route is hit', async () => {
     const res = await request(app).get(
       `/api/v1/profiles/${testProfile.body.id}`
