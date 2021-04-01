@@ -24,7 +24,7 @@ module.exports = class Profile {
     return new Profile(rows[0]);
   }
 
-  static async retrieve(id: string) {
+  static async retrieve(id?: string) {
     if (!id) {
       const { rows } = await pool.query(`SELECT * FROM profiles`);
 

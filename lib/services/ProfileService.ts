@@ -1,4 +1,6 @@
 const Profile = require('../models/Profile');
+//@ts-ignore
+const { getGif } = require('../utils/giphy');
 
 module.exports = class ProfileServices {
   static async create({ name, word }: UserProfile) {
@@ -9,7 +11,7 @@ module.exports = class ProfileServices {
     return profile;
   }
 
-  static async retrieve(id: string) {
+  static async retrieve(id?: string) {
     const profiles = await Profile.retrieve(id);
 
     return profiles;
