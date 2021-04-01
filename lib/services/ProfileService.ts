@@ -11,22 +11,22 @@ module.exports = class ProfileServices {
     return profile;
   }
 
-  static async retrieve(id?: string) {
+  static async retrieve(id: string) {
     const profiles = await Profile.retrieve(id);
 
     return profiles;
   }
 
-  static async updateById(id: string, { name, word }: UserProfile) {
+  static async update(id: string, { name, word }: UserProfile) {
     const gif = await getGif(word);
 
-    const profile = await Profile.updateById(id, { name, word, gif });
+    const profile = await Profile.update(id, { name, word, gif });
 
     return profile;
   }
 
-  static async deleteById(id: string) {
-    const profile = await Profile.deleteById(id);
+  static async delete(id: string) {
+    const profile = await Profile.delete(id);
 
     return profile;
   }

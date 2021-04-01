@@ -17,10 +17,37 @@ describe('04-build-something routes', () => {
   });
 
   it('should retrieve one user profile when route is hit', async () => {
-    const res = await request(app).get('/api/v1/profiles/1');
+    const res = await request(app).get(
+      `/api/v1/profiles/${testProfile.body.id}`
+    );
+
+    expect(res.body).toEqual(testProfile.body);
+  });
+
+  it('should retrieve all user profiles when route is hit', async () => {
+    const res = await request(app).get(`/api/v1/profiles/all`);
+
+    expect(res.body[0]).toEqual(testProfile.body);
+  });
+
+  it('should update a user profile when route is hit', async () => {
+    const res = await request(app)
+      .put('/api/v1/profiles/1')
+      .send({ name: 'maple', word: 'burger' });
+
     expect(res.body).toEqual({
-      gif:
-        'https://media3.giphy.com/media/Qs75BqLW44RrP0x6qL/giphy.gif?cid=f3311ef94yjyrcpzw486ei914a9t03x5u1djz1z0lpksr6v6&rid=giphy.gif',
+      gif: expect.any(String),
+      id: '1',
+      name: 'maple',
+      word: 'burger',
+    });
+  });
+
+  it('should delete a user profile when route is hit', async () => {
+    const res = await request(app).delete('/api/v1/profiles/1');
+
+    expect(res.body).toEqual({
+      gif: expect.any(String),
       id: '1',
       name: 'abel',
       word: 'wizard',

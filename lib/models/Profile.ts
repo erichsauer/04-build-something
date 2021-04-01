@@ -24,8 +24,8 @@ module.exports = class Profile {
     return new Profile(rows[0]);
   }
 
-  static async retrieve(id?: string) {
-    if (!id) {
+  static async retrieve(id: string) {
+    if (id === 'all') {
       const { rows } = await pool.query(`SELECT * FROM profiles`);
 
       const profiles = rows.map((profile: UserProfile) => new Profile(profile));
@@ -41,7 +41,7 @@ module.exports = class Profile {
     }
   }
 
-  static async updateById(id: string, { name, word, gif }: UserProfile) {
+  static async update(id: string, { name, word, gif }: UserProfile) {
     const {
       rows,
     } = await pool.query(
@@ -52,7 +52,7 @@ module.exports = class Profile {
     return new Profile(rows[0]);
   }
 
-  static async deleteById(id: string) {
+  static async delete(id: string) {
     const {
       rows,
     } = await pool.query(`DELETE FROM profiles WHERE id=$1 RETURNING *`, [id]);

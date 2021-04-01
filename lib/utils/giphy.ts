@@ -1,9 +1,11 @@
 const request = require('superagent');
 //@ts-ignore
-const getGif = async (search: string, results: number = 1) => {
-  const URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&q=${search}&limit=${results}&offset=0&rating=pg&lang=en`;
+const getGif = async (search: string) => {
+  const URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&q=${search}&limit=10&offset=0&rating=pg&lang=en`;
   const { body } = await request.get(URL);
-  return body.data[0].images.downsized.url;
+  const randomResult =
+    body.data[Math.floor(Math.random() * 10)].images.downsized.url;
+  return randomResult;
 };
 
 module.exports = { getGif };
