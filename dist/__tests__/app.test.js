@@ -56,6 +56,7 @@ describe('04-build-something routes', function () {
             }
         });
     }); });
+    afterAll(function () { return pool.end(); });
     it('should retrieve one user profile when route is hit', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
