@@ -2,7 +2,6 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { getGif } = require('../lib/utils/giphy');
 
 describe('04-build-something routes', () => {
   beforeEach(() => {
@@ -53,4 +52,8 @@ describe('04-build-something routes', () => {
       word: 'wizard',
     });
   });
+});
+
+afterAll((done) => {
+  done();
 });
