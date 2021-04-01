@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest --verbose --runInBand --testLocationInResults --setupFiles dotenv/config",
+    "test": "jest --detectOpenHandles --verbose --runInBand --testLocationInResults --setupFiles dotenv/config",
     "test:watch": "npm run test -- --watch",
     "start": "node -r dotenv/config dist/server.js",
     "start:watch": "nodemon -r dotenv/config dist/server.js",

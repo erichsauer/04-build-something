@@ -53,7 +53,3 @@ describe('04-build-something routes', () => {
     });
   });
 });
-
-afterAll((done) => {
-  done();
-});
