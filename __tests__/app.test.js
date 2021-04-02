@@ -2,43 +2,46 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const giphy = require('../lib/utils/giphy');
-// jest.mock('axios', () => () => {
-//   data: {
-//     data: [
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//       {
-//         images: { downsized: { url: 'fake_url' } },
-//       },
-//     ];
-//   }
-// });
+// const giphy = require('../lib/utils/giphy');
+// giphy.getGif = jest.fn().mockReturnValue('fake_url');
+
+const axios = require('axios');
+jest.mock('axios', () => {
+  data: {
+    data: [
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+      {
+        images: { downsized: { url: 'fake_url' } },
+      },
+    ];
+  }
+});
 
 describe('04-build-something routes', () => {
   beforeEach(() => {
@@ -47,7 +50,6 @@ describe('04-build-something routes', () => {
 
   let testProfile;
   beforeEach(async () => {
-    giphy.getGif = jest.fn().mockReturnValue('fake_url');
     testProfile = await request(app)
       .post('/api/v1/profiles')
       .send({ name: 'abel', word: 'wizard' });
