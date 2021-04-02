@@ -35,20 +35,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var request = require('superagent');
-//@ts-ignore
+var axios = require('axios');
+// @ts-ignore
 var getGif = function (search) { return __awaiter(void 0, void 0, void 0, function () {
-    var URL, body, randomResult;
+    var URL, data, randomResult;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 URL = "https://api.giphy.com/v1/gifs/search?api_key=" + process.env.GIPHY + "&q=" + search + "&limit=10&offset=0&rating=pg&lang=en";
-                return [4 /*yield*/, request.get(URL)];
+                return [4 /*yield*/, axios.get(URL)];
             case 1:
-                body = (_a.sent()).body;
-                randomResult = body.data[Math.floor(Math.random() * 10)].images.downsized.url;
+                data = (_a.sent()).data;
+                randomResult = data.data[Math.floor(Math.random() * 10)].images.downsized.url;
                 return [2 /*return*/, randomResult];
         }
     });
 }); };
-module.exports = { getGif: getGif };
+module.exports = {
+    getGif: getGif,
+};

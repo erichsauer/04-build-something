@@ -39,6 +39,43 @@ var pool = require('../lib/utils/pool');
 var setup = require('../data/setup');
 var request = require('supertest');
 var app = require('../lib/app');
+var giphy = require('../lib/utils/giphy');
+// jest.mock('axios', () => () => {
+//   data: {
+//     data: [
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//     ];
+//   }
+// });
 describe('04-build-something routes', function () {
     beforeEach(function () {
         return setup(pool);
@@ -47,9 +84,11 @@ describe('04-build-something routes', function () {
     beforeEach(function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request(app)
-                        .post('/api/v1/profiles')
-                        .send({ name: 'abel', word: 'wizard' })];
+                case 0:
+                    giphy.getGif = jest.fn().mockReturnValue('fake_url');
+                    return [4 /*yield*/, request(app)
+                            .post('/api/v1/profiles')
+                            .send({ name: 'abel', word: 'wizard' })];
                 case 1:
                     testProfile = _a.sent();
                     return [2 /*return*/];
@@ -67,7 +106,7 @@ describe('04-build-something routes', function () {
                 case 1:
                     res = _a.sent();
                     expect(res.body).toEqual({
-                        gif: expect.any(String),
+                        gif: 'fake_url',
                         id: '2',
                         name: 'maple',
                         word: 'goopy',

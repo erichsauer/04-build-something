@@ -2,6 +2,43 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const giphy = require('../lib/utils/giphy');
+// jest.mock('axios', () => () => {
+//   data: {
+//     data: [
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//       {
+//         images: { downsized: { url: 'fake_url' } },
+//       },
+//     ];
+//   }
+// });
 
 describe('04-build-something routes', () => {
   beforeEach(() => {
@@ -10,6 +47,7 @@ describe('04-build-something routes', () => {
 
   let testProfile;
   beforeEach(async () => {
+    giphy.getGif = jest.fn().mockReturnValue('fake_url');
     testProfile = await request(app)
       .post('/api/v1/profiles')
       .send({ name: 'abel', word: 'wizard' });
@@ -23,7 +61,7 @@ describe('04-build-something routes', () => {
       .send({ name: 'maple', word: 'goopy' });
 
     expect(res.body).toEqual({
-      gif: expect.any(String),
+      gif: 'fake_url',
       id: '2',
       name: 'maple',
       word: 'goopy',
