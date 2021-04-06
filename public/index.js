@@ -4,9 +4,12 @@ const ul = document.getElementById('profiles');
 const addProfile = (profile) => {
   const li = document.createElement('li');
   const img = document.createElement('img');
-  li.textContent = `Name: ${profile.name}`;
+
+  li.textContent = profile.name;
+  li.className = 'profile-container';
   img.src = profile.gif;
   img.width = '200';
+
   li.append(img);
   ul.append(li);
 };
